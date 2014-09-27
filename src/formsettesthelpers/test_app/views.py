@@ -9,7 +9,8 @@ class ModelFormSetView(View):
         formset = UserFormSet(request.POST)
         if formset.is_valid():
             formset.save()
-        return HttpResponse('')
+            return HttpResponse('Is valid')
+        return HttpResponse('Is not valid')
 
 
 class FormSetView(View):
