@@ -34,7 +34,7 @@ class FormSetHelper(object):
         return '%s-%d-' % (self.prefix, index)
 
     def _to_dict(self, li):
-        raise NotImplementedError
+        return dict(zip(self.fields, li))
 
     def generate_managementform_data(self, *args, **kwargs):
         max_num_forms = kwargs.get('max_num_forms', 1000)
