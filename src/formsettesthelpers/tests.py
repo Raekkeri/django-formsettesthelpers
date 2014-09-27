@@ -6,6 +6,35 @@ from formsettesthelpers import *
 from formsettesthelpers.test_app.forms import UserFormSet, PersonFormSet
 
 
+class UsageTest(TestCase):
+    def test_demonstration(self):
+        from django.forms.models import modelformset_factory
+        # The following formset is something one could use in a view.
+        FormSet = modelformset_factory(User, fields=('username', 'email'))
+
+        # To test such view, we'd need to generate a formset data dict
+        # to POST to that view.
+        formset_helper = ModelFormSetHelper(FormSet)
+        data = formset_helper.generate([
+            {'username': 'admin', 'email': 'admin@example.com'},
+            {'username': 'user1', 'email': 'userer@example.com'},
+            ], total_forms=2)
+        # `data` now contains the formset data, something like
+        # """{u'form-INITIAL_FORMS': 0, u'form-MAX_NUM_FORMS': 1000,
+        #     u'form-1-username': 'user1', u'form-1-email':
+        #     'userer@example.com',...}"""
+        self.assertEquals(data['form-1-username'], 'user1')
+
+        # The `test_app` application just happens to have such view, so lets
+        # use that.
+        self.client.post(reverse('modelformset'), data)
+        self.assertEquals(User.objects.count(), 2)
+        self.assertEquals(User.objects.get(username='admin').email,
+                'admin@example.com')
+        self.assertEquals(User.objects.get(username='user1').email,
+                'userer@example.com')
+
+
 class BasicFormsetTestSkeleton(object):
     def setUp(self):
         self.fh = self.helper_class(self.formset_class)
