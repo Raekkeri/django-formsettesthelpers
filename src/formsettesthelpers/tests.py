@@ -6,7 +6,7 @@ from formsettesthelpers import ModelFormSetHelper
 from formsettesthelpers.test_app.forms import UserFormSet
 
 
-class Test(TestCase):
+class TestModelFormSet(TestCase):
     def test_modelformset(self):
         fh = ModelFormSetHelper(UserFormSet)
         data = fh.generate([
