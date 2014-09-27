@@ -5,10 +5,10 @@ Author: Teemu Husso (teemu.husso@gmail.com)
 """
 
 
-__all__ = ['ModelFormsetHelper']
+__all__ = ['ModelFormSetHelper']
 
 
-class ModelFormsetHelper(object):
+class ModelFormSetHelper(object):
     def __init__(self, formset_class):
         self.formset = formset_class()
         self.fields = self.formset[0].fields.keys()
