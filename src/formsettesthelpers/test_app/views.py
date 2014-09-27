@@ -1,7 +1,7 @@
 from django.views.generic import View
 from django.http import HttpResponse
 
-from forms import UserFormSet
+from forms import UserFormSet, PersonFormSet
 
 
 class ModelFormsetView(View):
@@ -12,4 +12,13 @@ class ModelFormsetView(View):
         return HttpResponse('')
 
 
+class FormSetView(View):
+    def post(self, request):
+        formset = PersonFormSet(request.POST)
+        if formset.is_valid():
+            return HttpResponse('Is valid')
+        return HttpResponse('Is not valid')
+
+
 modelformset = ModelFormsetView.as_view()
+formset = FormSetView.as_view()

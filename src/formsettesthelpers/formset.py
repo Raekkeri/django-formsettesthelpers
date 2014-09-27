@@ -5,10 +5,10 @@ Author: Teemu Husso (teemu.husso@gmail.com)
 """
 
 
-__all__ = ['ModelFormSetHelper']
+__all__ = ['ModelFormSetHelper', 'FormSetHelper']
 
 
-class ModelFormSetHelper(object):
+class FormSetHelper(object):
     def __init__(self, formset_class):
         self.formset = formset_class()
         self.fields = self.formset[0].fields.keys()
@@ -46,6 +46,13 @@ class ModelFormSetHelper(object):
                 (u'INITIAL_FORMS', initial_forms),
                 (u'TOTAL_FORMS', total_forms))
         return dict(('%s-%s' % (self.prefix, i[0]), i[1]) for i in d)
+
+    def default_values(self):
+        return {}
+
+
+class ModelFormSetHelper(FormSetHelper):
+    """Test helper for ModelFormSets"""
 
     def default_values(self):
         ret = {}

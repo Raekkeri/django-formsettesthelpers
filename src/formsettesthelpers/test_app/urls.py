@@ -3,4 +3,5 @@ import views
 
 urlpatterns = patterns('',
     url(r'^modelformset/$', views.modelformset, name='modelformset'),
+    url(r'^formset/$', views.formset, name='formset'),
 )

@@ -2,8 +2,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from formsettesthelpers import ModelFormSetHelper
-from formsettesthelpers.test_app.forms import UserFormSet
+from formsettesthelpers import *
+from formsettesthelpers.test_app.forms import UserFormSet, PersonFormSet
 
 
 class TestModelFormSet(TestCase):
@@ -15,3 +15,14 @@ class TestModelFormSet(TestCase):
             ], total_forms=2)
         response = self.client.post(reverse('modelformset'), data)
         self.assertEquals(User.objects.count(), 2)
+
+
+class TestFormSet(TestCase):
+    def test_formset(self):
+        fh = FormSetHelper(PersonFormSet)
+        data = fh.generate([
+            {'name': 'Janelle', 'slug': 'j1', 'age': 24},
+            {'name': 'Joe', 'slug': 'j2', 'age': 25},
+            ], total_forms=2)
+        response = self.client.post(reverse('formset'), data)
+        self.assertEquals(response.content, 'Is valid')
