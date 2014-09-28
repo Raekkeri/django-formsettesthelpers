@@ -1,18 +1,16 @@
 from setuptools import find_packages, setup
 
-
-version = '0.1'
-
 setup(
-    name='formsettesthelpers',
-    version=version,
+    name='django-formsettesthelpers',
+    version='0.1',
     description="Django test helpers for generating formset data.",
     long_description="",
     classifiers=[],
-    keywords='',
-    author='',
-    author_email='',
-    url='',
+    keywords=['django', 'formset', 'test', 'helpers'],
+    author='Teemu Husso',
+    author_email='teemu.husso@gmail.com',
+    url='https://github.com/Raekkeri/django-formsettesthelpers',
+    download_url = 'https://github.com/raekkeri/django-formsettesthelpers/tarball/0.1'
     license='',
     packages=find_packages('src', exclude=['ez_setup']),
     namespace_packages=[],
