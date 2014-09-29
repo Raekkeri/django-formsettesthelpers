@@ -52,7 +52,7 @@ class BasicFormsetTestSkeleton(object):
     def test_prefixed(self):
         fh = self.helper_class(self.formset_class, prefix='humans')
         data = fh.generate(
-                self.two_forms_data, total_forms=2, prefix='humans')
+                self.two_forms_data, total_forms=2)
         response = self.client.post(
                 reverse('prefixed_%s' % self.view_name), data)
         self.assertEquals(response.content, 'Is valid')
