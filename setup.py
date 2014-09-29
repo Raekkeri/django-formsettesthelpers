@@ -10,7 +10,7 @@ setup(
     author='Teemu Husso',
     author_email='teemu.husso@gmail.com',
     url='https://github.com/Raekkeri/django-formsettesthelpers',
-    download_url = 'https://github.com/raekkeri/django-formsettesthelpers/tarball/0.1'
+    download_url = 'https://github.com/raekkeri/django-formsettesthelpers/tarball/0.1',
     license='',
     packages=find_packages('src', exclude=['ez_setup']),
     namespace_packages=[],
