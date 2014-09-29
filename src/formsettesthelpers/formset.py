@@ -9,10 +9,10 @@ __all__ = ['ModelFormSetHelper', 'FormSetHelper']
 
 
 class FormSetHelper(object):
-    def __init__(self, formset_class):
+    def __init__(self, formset_class, prefix=None):
         self.formset = formset_class()
         self.fields = self.formset[0].fields.keys()
-        self.prefix = self.formset.prefix
+        self.prefix = prefix or self.formset.prefix
 
     def generate(self, data, **kwargs):
         ret = {}

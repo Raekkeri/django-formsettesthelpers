@@ -49,6 +49,14 @@ class BasicFormsetTestSkeleton(object):
         response = self.client.post(reverse(self.view_name), data)
         self.assertEquals(response.content, 'Is valid')
 
+    def test_prefixed(self):
+        fh = self.helper_class(self.formset_class, prefix='humans')
+        data = fh.generate(
+                self.two_forms_data, total_forms=2, prefix='humans')
+        response = self.client.post(
+                reverse('prefixed_%s' % self.view_name), data)
+        self.assertEquals(response.content, 'Is valid')
+
 
 class TestModelFormSet(BasicFormsetTestSkeleton, TestCase):
     helper_class = ModelFormSetHelper
@@ -67,6 +75,10 @@ class TestModelFormSet(BasicFormsetTestSkeleton, TestCase):
     def test_to_dict(self):
         super(TestModelFormSet, self).test_to_dict()
         self.assertEquals(User.objects.count(), 1)
+
+    def test_prefixed(self):
+        super(TestModelFormSet, self).test_prefixed()
+        self.assertEquals(User.objects.count(), 2)
 
 
 class TestFormSet(BasicFormsetTestSkeleton, TestCase):
