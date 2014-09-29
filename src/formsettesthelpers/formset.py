@@ -11,7 +11,7 @@ __all__ = ['ModelFormSetHelper', 'FormSetHelper']
 class FormSetHelper(object):
     def __init__(self, formset_class, prefix=None):
         self.formset = formset_class()
-        self.fields = self.formset[0].fields.keys()
+        self.fields = self.formset.form().fields.keys()
         self.prefix = prefix or self.formset.prefix
 
     def generate(self, data, **kwargs):
@@ -56,7 +56,7 @@ class ModelFormSetHelper(FormSetHelper):
 
     def default_values(self):
         ret = {}
-        instance = self.formset[0].instance
+        instance = self.formset.form().instance
         for field in self.fields:
             if hasattr(instance, field):
                 ret[field] = getattr(instance, field)
